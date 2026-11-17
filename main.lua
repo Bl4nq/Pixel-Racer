@@ -93,15 +93,16 @@ function love.keypressed(key)
     elseif key == 'enter' or key == 'return' then
 
         if gameState == 'race' then
-            -- Return to the start screen.
+            -- Pause the Race.
             gameState = 'pause'
 
         elseif gameState == 'start' then
             -- Start a new race.
+            resetGame()
             gameState = 'race'
 
         elseif gameState == 'pause' then
-            -- Start a new race.
+            -- Restart the race.
             gameState = 'race'
 
         elseif gameState == 'game over' then
@@ -442,6 +443,8 @@ end
 
 
 function resetGame()
+    -- Randomizer Seed based on time
+    math.randomseed(os.time())
     -- Remove all enemy cars from the previous race.
     cars = {}
 
